@@ -8,6 +8,9 @@ seaborn==0.13.2
 boruta==0.4.3
 shap==0.52.0
 imbalanced-learn==0.14.2
+
+statsmodels==0.15.0
+chronos-forecasting==2.3.2
 torch==2.13.0
 tabpfn==9.0.0
 autogluon.tabular[mitra]==1.6.3

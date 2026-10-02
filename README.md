@@ -17,8 +17,8 @@ ml-cookbooks/
 │   ├── unsupervisioned/   # Clustering (K-Means, DBSCAN), Redução (PCA, t-SNE)
 │   ├── metaheuristics/    # Busca e otimização: algoritmos genéticos
 │   ├── foundational/      # Modelos fundacionais tabulares (TabPFN, Mitra)
-│   ├── time-series/       # Previsão: protocolo temporal, ETS/SARIMAX, lags (em preparação)
-│   └── pipeline/          # O fluxo: análise, encoding, features, validação, seleção, desbalanceamento
+│   ├── pipeline/          # O fluxo: análise, encoding, features, validação, seleção, desbalanceamento
+│   └── time-series/       # O teste é o futuro: protocolo temporal, ETS/SARIMAX, lags, fundacional
 ├── data/                  # Datasets de exemplo ou scripts de download
 ├── requirements.txt       # Dependências globais do ambiente
 ├── GLOSSARIO.md           # Os termos em inglês, um por linha
