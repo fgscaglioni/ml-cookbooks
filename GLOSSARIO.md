@@ -112,6 +112,20 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | elitismo | Garantir que o melhor indivíduo de cada geração sobreviva à seguinte. |
 | geração | Uma rodada completa de avaliar, selecionar, cruzar e mutar. |
 
+## Engenharia de features
+
+| Termo | Em uma frase |
+|-------|--------------|
+| engenharia de features | Criar coluna nova a partir das que existem, com hipótese declarada e medição. |
+| interação | Efeito que só aparece quando duas colunas são olhadas juntas, como o produto delas. |
+| agregação por grupo | Trocar a linha pelo comportamento médio do grupo dela: contexto, não resposta. |
+| transformação de distribuição | Mudar a escala de uma coluna (`log`, quantil) para o modelo lidar melhor com ela. |
+| faixas (binning) | Trocar uma coluna numérica por faixas ordenadas. |
+| data expandida | Extrair mês, dia da semana e fim de semana de uma coluna de data. |
+| palavra-chave (indicador de texto) | Coluna que diz se o texto menciona algo que importa. |
+| vazamento temporal | Coluna que só existe depois do desfecho; usá-la é prever o passado com a resposta na mão. |
+| hipótese | A aposta que justifica a coluna nova. Sem hipótese, criar feature é tentativa. |
+
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -158,3 +172,4 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **correlação × causa**: duas colunas andando juntas não dizem que uma causa a outra, e uma coluna vazada anda junto porque é o alvo disfarçado.
 - **faltante × zero**: zero é um valor medido, faltante é ausência; tratar os dois igual inventa dado.
 - **one-hot × codificação pelo alvo**: o primeiro não usa o alvo e pode ser calculado antes da divisão; o segundo usa, e por isso tem de acontecer dentro do pipeline.
+- **transformar × criar**: transformar reescreve a coluna que existe (encoding, `log`, faixas); criar acrescenta coluna que não existia (interação, agregação, calendário, palavra-chave).
