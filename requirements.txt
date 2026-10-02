@@ -6,6 +6,7 @@ scikit-learn==1.9.1
 matplotlib==3.11.2
 seaborn==0.13.2
 statsmodels==0.15.0
+chronos-forecasting==2.3.2
 torch==2.13.0
 tabpfn==9.0.0
 autogluon.tabular[mitra]==1.6.3
