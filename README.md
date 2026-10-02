@@ -31,7 +31,7 @@ ml-cookbooks/
 
 ## 📓 Notebooks
 
-Cada notebook é autossuficiente: instala o que precisa (com versão fixada, para não quebrar em release futura), carrega os dados e roda o próprio baseline.
+Cada notebook é autossuficiente: instala o que falta além do que o ambiente já traz (com versão fixada, para não quebrar em release futura), carrega os dados e roda o próprio baseline. Os gráficos usam `seaborn` com a paleta `colorblind`, e o tema está fixado no primeiro bloco de código de cada notebook.
 
 As pastas seguem três eixos. As de **paradigma** (`classical`, `ensemble`, `deep-learning`, `foundational`, `metaheuristics`) ensinam um modelo por vez, com o preparo mínimo embutido, para o notebook se sustentar sozinho. A pasta `pipeline/` é o fluxo da tabela, numerado na ordem em que se faz. A pasta `time-series/` é uma tarefa com protocolo próprio, na qual a ordem importa e o teste é o futuro; `unsupervisioned/` é a outra tarefa, a que não tem rótulo.
 
