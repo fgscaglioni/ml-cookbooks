@@ -112,6 +112,30 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | elitismo | Garantir que o melhor indivíduo de cada geração sobreviva à seguinte. |
 | geração | Uma rodada completa de avaliar, selecionar, cruzar e mutar. |
 
+## Série temporal
+
+| Termo | Em uma frase |
+|-------|--------------|
+| série temporal | Dado em que a ordem importa: cada linha é um instante, e o futuro não pode entrar no treino. |
+| tendência | A direção de longo prazo da série, para cima ou para baixo. |
+| sazonalidade | O padrão que se repete em intervalo fixo: dia da semana, mês, hora do dia. |
+| ruído | A parte que não tem padrão e não se prevê. |
+| choque | Evento pontual fora do padrão, que aparece uma vez e desaparece. |
+| horizonte | Quantos passos à frente a previsão alcança; erro sem horizonte não significa nada. |
+| passo à frente | Uma unidade do horizonte: prever 14 passos é prever cada um dos próximos 14 dias. |
+| baseline ingênuo | Repetir o último valor observado. |
+| sazonal ingênuo | Repetir o valor do mesmo ponto do ciclo anterior, como o mesmo dia da semana passada. |
+| média móvel | Repetir a média dos últimos k valores, sempre deslocada para não incluir o presente. |
+| backtesting | Avaliar com várias origens ao longo do tempo, em vez de uma divisão só. |
+| janela expansível | No backtesting, o treino começa no início e cresce a cada origem. |
+| janela deslizante | No backtesting, o treino mantém tamanho fixo e anda para a frente, esquecendo o passado distante. |
+| origem | O instante em que o treino termina e a previsão começa, num ciclo do backtesting. |
+| previsão recursiva | Prever um passo e usar a previsão como dado para o próximo; acumula erro. |
+| previsão direta | Treinar um modelo por passo do horizonte; não acumula erro e custa mais treinos. |
+| MASE | Erro dividido pelo erro do sazonal ingênuo; o único comparável entre séries de escalas diferentes. |
+| MAPE | Erro percentual médio; não existe quando o valor real é zero. |
+| sMAPE | Variação simétrica do MAPE, com teto de 200% e problemas próprios. |
+
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -132,3 +156,6 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **época × iteração**: uma época é uma passada por todo o treino; uma iteração é um passo (um lote).
 - **padronização × normalização**: padronizar é deixar média 0 e desvio 1; normalizar costuma ser reescalar para um intervalo.
 - **importância × causa**: nenhum notebook aqui mede causa, e acurácia não é explicação.
+- **recursiva × direta**: a recursiva alimenta o modelo com as próprias previsões e por isso acumula erro; a direta treina um modelo para cada passo do horizonte.
+- **MAPE × MASE**: o MAPE devolve `inf` com um zero na conta e distorce em série de valor baixo; o MASE é relativo a um baseline da própria série, então 1,0 tem o mesmo sentido em qualquer uma.
+- **janela expansível × deslizante**: as duas fazem backtesting; a expansível acumula histórico, a deslizante mantém o treino do mesmo tamanho.
