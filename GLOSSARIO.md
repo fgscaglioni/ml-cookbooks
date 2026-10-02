@@ -135,6 +135,18 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | correlação de Spearman | Mede relação de ordem, sem exigir que seja reta. |
 | vazamento (leakage) | Coluna que só existe depois do desfecho, ou informação do teste que entra no treino. |
 | classe majoritária | A classe mais frequente; chutar sempre ela é o baseline que a acurácia esconde. |
+| encoding (codificação) | Transformar coluna de texto em número, para o modelo poder usá-la. |
+| coluna ordinal | Categórica em que a ordem existe (`baixo` < `medio` < `alto`). |
+| coluna nominal | Categórica sem ordem (`plano`, `cidade`). |
+| cardinalidade alta | Coluna com muitas categorias distintas; é o que decide entre one-hot e codificação pelo alvo. |
+| one-hot | Uma coluna por categoria, com 1 na categoria da linha e 0 nas outras. |
+| categorias raras | As que têm poucas linhas; juntá-las num rótulo só é decisão que não usa o alvo. |
+| codificação pelo alvo (target encoding) | Trocar a categoria pela média do alvo naquela categoria. |
+| suavização (smoothing) | Puxar a média da categoria na direção da média geral, quando há poucas linhas nela. |
+| codificação com validação cruzada interna | O codificador calcula a média de cada fold, para não usar a própria linha que está codificando. |
+| handle_unknown | O que o codificador faz quando aparece categoria nova na hora de prever: errar ou ignorar. |
+| ColumnTransformer | Objeto que aplica um tratamento diferente a cada grupo de colunas. |
+| Pipeline | Objeto que encadeia tratamentos e modelo, e garante que o tratamento aprenda só no treino. |
 
 ## Não confunda
 
@@ -145,3 +157,4 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **importância × causa**: nenhum notebook aqui mede causa, e acurácia não é explicação.
 - **correlação × causa**: duas colunas andando juntas não dizem que uma causa a outra, e uma coluna vazada anda junto porque é o alvo disfarçado.
 - **faltante × zero**: zero é um valor medido, faltante é ausência; tratar os dois igual inventa dado.
+- **one-hot × codificação pelo alvo**: o primeiro não usa o alvo e pode ser calculado antes da divisão; o segundo usa, e por isso tem de acontecer dentro do pipeline.
