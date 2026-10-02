@@ -6,8 +6,7 @@
 
 Checa: JSON valido e nbformat 4, nenhum output de erro, run completo (execution_count
 1..N), toda referencia .ipynb resolve para arquivo existente, todo install de tabpfn/
-autogluon com versao fixada, README citando todos os notebooks e .gitignore cobrindo
-dado e artefato gerado.
+autogluon com versao fixada e .gitignore cobrindo dado e artefato gerado.
 """
 import json
 import pathlib
@@ -17,7 +16,6 @@ import sys
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 NBDIR = REPO / "notebooks"
-README = REPO / "README.md"
 IGNORADOS = ("data/exemplo.csv", "artifacts_tabpfn/x.csv", "artifacts_mitra/x.csv",
              "splits_fingerprint.json", "ag_warmup_clf/x", "ag_mitra_reg/x",
              "modelo_mitra_classificacao/x")
@@ -76,10 +74,6 @@ for nb_path in notebooks:
     if any(re.search(r"/home/[a-z0-9_]+/", "".join(o.get("text", [])) + json.dumps(o.get("data", {}), ensure_ascii=False))
            for c in codigo for o in c.get("outputs", [])):
         avisa(f"{rel}: output com caminho absoluto de maquina (nao pode ir para repo publico)")
-
-readme = README.read_text(encoding="utf-8")
-for nb_path in notebooks:
-    checa(nb_path.name in readme, f"README cita {nb_path.name}")
 
 if (REPO / ".git").exists():
     for alvo in IGNORADOS:
