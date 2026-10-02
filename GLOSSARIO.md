@@ -1,6 +1,6 @@
 # Glossário
 
-Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase. No fim de cada seção, onde aquilo aparece no repositório.
+Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 
 ## Treino e otimização
 
@@ -17,8 +17,6 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | convergir | Quando a perda para de cair; daí em diante treinar mais só gasta tempo, ou começa a decorar. |
 | gradiente que desvanece (vanishing gradient) | O gradiente que chega às primeiras camadas vira produto de fatores pequenos e some; é o que limita a RNN simples. |
 | corte de gradiente (clipping) | Limitar o tamanho do gradiente para ele não explodir num passo só. |
-
-Onde: `deep-learning/01_mlp`, `deep-learning/03_rnn`, `ensemble/02_hyperparameters`.
 
 ## Ajuste e avaliação
 
@@ -38,8 +36,6 @@ Onde: `deep-learning/01_mlp`, `deep-learning/03_rnn`, `ensemble/02_hyperparamete
 | regularização | Somar à perda uma penalidade pelo tamanho dos coeficientes, para o modelo só usar o que se paga. |
 | padronização (standardization) | Deixar cada coluna com média 0 e desvio 1; obrigatório quando o modelo mede distância (kNN, SVM, rede) e irrelevante para árvore. |
 
-Onde: todos os notebooks; a discussão de validação cruzada está em `classical/01_classification`.
-
 ## Métricas
 
 | Termo | Em uma frase |
@@ -53,8 +49,6 @@ Onde: todos os notebooks; a discussão de validação cruzada está em `classica
 | silhouette | Nota de -1 a 1 de uma partição, comparando a distância dentro do grupo com a distância ao grupo vizinho. |
 | inércia | Soma das distâncias ao centro do grupo no K-Means; sempre melhora quando se aumenta o número de grupos, então não decide o `k` sozinha. |
 | ARI | Compara dois agrupamentos (o seu e a verdade escondida), de 0 (acaso) a 1 (idênticos). |
-
-Onde: `classical/01_classification`, `classical/02_regression` e `unsupervisioned/01_clustering`.
 
 ## Famílias de modelos
 
@@ -72,8 +66,6 @@ Onde: `classical/01_classification`, `classical/02_regression` e `unsupervisione
 | ensemble | Combinação de vários modelos; bagging e boosting são as duas formas. |
 | bagging | Treinar modelos independentes em amostras do dado e votar (o Random Forest é isso com árvores). |
 | boosting | Treinar modelos em sequência, cada um corrigindo o erro que sobrou do anterior (XGBoost, LightGBM, CatBoost). |
-
-Onde: `foundational/01_tabpfn` e `foundational/02_mitra` (os seis primeiros), `ensemble/01_bagging_and_boosting` (os três últimos).
 
 ## Redes neurais
 
@@ -94,8 +86,6 @@ Onde: `foundational/01_tabpfn` e `foundational/02_mitra` (os seis primeiros), `e
 | estado escondido | A memória da RNN, reescrita a cada passo. |
 | LSTM e GRU | Células recorrentes com portas, que decidem o que guardar e o que esquecer; existem porque a RNN simples falha em tarefas que combinam a sequência inteira. |
 
-Onde: `deep-learning/01_mlp`, `deep-learning/02_cnn` e `deep-learning/03_rnn`.
-
 ## Redução de dimensão
 
 | Termo | Em uma frase |
@@ -105,8 +95,6 @@ Onde: `deep-learning/01_mlp`, `deep-learning/02_cnn` e `deep-learning/03_rnn`.
 | variância explicada | Quanto da variação total cada componente carrega; a soma acumulada decide quantas guardar. |
 | t-SNE | Posiciona os pontos em duas dimensões tentando manter cada um perto dos seus vizinhos; serve para ver, não para medir. |
 | perplexity | No t-SNE, o tamanho aproximado da vizinhança que cada ponto tenta respeitar. |
-
-Onde: `unsupervisioned/02_dimensionality_reduction`.
 
 ## Busca sem derivada
 
@@ -124,8 +112,6 @@ Onde: `unsupervisioned/02_dimensionality_reduction`.
 | elitismo | Garantir que o melhor indivíduo de cada geração sobreviva à seguinte. |
 | geração | Uma rodada completa de avaliar, selecionar, cruzar e mutar. |
 
-Onde: `metaheuristics/01_genetic_algorithm`.
-
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -138,8 +124,6 @@ Onde: `metaheuristics/01_genetic_algorithm`.
 | divisão estratificada | Manter a proporção das classes em treino e teste, o que importa em dado desbalanceado. |
 | dataset de brinquedo | Dado pequeno e sintético usado para ensinar, como as meias-luas e os blobs. |
 | custo (fit_s, predict_s) | Tempo de treino e de previsão; em produção costuma ser o que decide qual modelo vai. |
-
-Onde: todos os notebooks.
 
 ## Não confunda
 
