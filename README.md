@@ -18,7 +18,7 @@ ml-cookbooks/
 │   ├── metaheuristics/    # Busca e otimização: algoritmos genéticos
 │   ├── foundational/      # Modelos fundacionais tabulares (TabPFN, Mitra)
 │   ├── time-series/       # Previsão: protocolo temporal, ETS/SARIMAX, lags (em preparação)
-│   └── pipeline/          # O fluxo: análise, encoding, seleção, validação (em preparação)
+│   └── pipeline/          # O fluxo: análise, encoding, features, validação, seleção, desbalanceamento
 ├── data/                  # Datasets de exemplo ou scripts de download
 ├── requirements.txt       # Dependências globais do ambiente
 ├── GLOSSARIO.md           # Os termos em inglês, um por linha
