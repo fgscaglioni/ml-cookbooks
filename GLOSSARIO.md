@@ -120,6 +120,25 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | elitismo | Garantir que o melhor indivíduo de cada geração sobreviva à seguinte. |
 | geração | Uma rodada completa de avaliar, selecionar, cruzar e mutar. |
 
+## Seleção de features
+
+| Termo | Em uma frase |
+|-------|--------------|
+| seleção de features | Escolher quais colunas entram no modelo, entre as que já existem. |
+| filtro | Mede cada coluna sozinha, sem treinar modelo: barato, e cego para redundância. |
+| wrapper | Treina o modelo muitas vezes, tirando e pondo colunas, e escolhe pelo que o modelo usa. |
+| embutido | A importância sai do próprio modelo treinado (`L1`, importância de árvore). |
+| RFE | Remove a coluna menos importante de cada vez, até sobrar o número pedido. |
+| RFECV | O `RFE` que decide sozinho quantas colunas ficam, por validação cruzada. |
+| permutation importance | Mede o estrago na nota ao embaralhar uma coluna de cada vez. |
+| Boruta | Procura todas as colunas que carregam informação, comparando cada uma com uma cópia embaralhada. |
+| features sombra | As cópias embaralhadas que o Boruta usa como régua do que é ruído. |
+| all-relevant | A pergunta do Boruta: tudo o que carrega informação, em vez do mínimo que basta. |
+| minimal-optimal | A pergunta do filtro, do wrapper e do embutido: o menor conjunto que mantém a nota. |
+| SHAP | Reparte a contribuição de cada coluna em cada previsão do modelo treinado. |
+| valor de Shapley | A contribuição média de uma coluna considerando todas as combinações possíveis de colunas. |
+| redundância | A coluna que repete informação de outra; é correlação alta entre colunas, não com o alvo. |
+
 ## Engenharia de features
 
 | Termo | Em uma frase |
@@ -182,3 +201,4 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **one-hot × codificação pelo alvo**: o primeiro não usa o alvo e pode ser calculado antes da divisão; o segundo usa, e por isso tem de acontecer dentro do pipeline.
 - **transformar × criar**: transformar reescreve a coluna que existe (encoding, `log`, faixas); criar acrescenta coluna que não existia (interação, agregação, calendário, palavra-chave).
 - **métrica indefinida × métrica perfeita**: um fold sem nenhuma linha da classe positiva não dá nota 1, dá nota que não existe; a média que ignora esses folds mente.
+- **relevante × redundante**: relevante é carregar informação; redundante é repetir informação que outra coluna já carrega, e o Boruta mede uso, não novidade.

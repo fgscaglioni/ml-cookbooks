@@ -5,6 +5,8 @@ pandas==2.3.3
 scikit-learn==1.9.1
 matplotlib==3.11.2
 seaborn==0.13.2
+boruta==0.4.3
+shap==0.52.0
 torch==2.13.0
 tabpfn==9.0.0
 autogluon.tabular[mitra]==1.6.3
