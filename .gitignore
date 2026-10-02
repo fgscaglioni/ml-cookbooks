@@ -232,3 +232,4 @@ splits_fingerprint.json
 ag_warmup_*/
 ag_mitra_*/
 modelo_mitra_*/
+catboost_info/
