@@ -27,6 +27,14 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | ajuste de hiperparâmetros (tuning) | Procurar a combinação de hiperparâmetros que rende mais numa métrica de validação. |
 | semente (seed) | O número que fixa os sorteios; com a mesma semente o mesmo código dá o mesmo resultado, quando o método é determinístico. |
 | validação cruzada (k-fold) | Dividir o treino em k partes e treinar k vezes, cada vez com uma parte de fora; devolve média e desvio, que uma divisão só não dá. |
+| KFold | Divide a tabela em k partes iguais; embaralhar é obrigatório quando a tabela veio ordenada, senão um fold pode ficar sem nenhuma classe positiva. |
+| StratifiedKFold | O mesmo, mantendo a proporção das classes em cada parte; é o padrão em classificação. |
+| GroupKFold | Mantém o grupo inteiro (pessoa, cliente, sensor) de um lado só; evita que o modelo reconheça quem respondeu. |
+| TimeSeriesSplit | Treina sempre no passado e testa no futuro; é a única divisão honesta quando existe ordem. |
+| grupo (groups=) | A coluna que diz a que unidade a linha pertence, quando uma unidade responde mais de uma linha. |
+| vazamento por grupo | Nota alta porque linhas da mesma unidade aparecem no treino e no teste; não gera aviso e depende do modelo aparecer. |
+| validação aninhada | Um laço externo mede e um interno escolhe, para o número que serviu para escolher não ser o número que você reporta. |
+| origem deslizante (backtesting) | Reavaliar o modelo avançando a origem do treino e testando sempre o bloco seguinte. |
 | validação | O pedaço usado para decidir (escolher hiperparâmetro, parar o treino). Não é o teste. |
 | teste | O pedaço que só se olha no fim, para medir de verdade; decidir olhando o teste é a forma mais fácil de publicar número otimista. |
 | baseline | O resultado simples que qualquer proposta precisa superar para valer a pena. |
@@ -112,6 +120,54 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | elitismo | Garantir que o melhor indivíduo de cada geração sobreviva à seguinte. |
 | geração | Uma rodada completa de avaliar, selecionar, cruzar e mutar. |
 
+## Seleção de features
+
+| Termo | Em uma frase |
+|-------|--------------|
+| seleção de features | Escolher quais colunas entram no modelo, entre as que já existem. |
+| filtro | Mede cada coluna sozinha, sem treinar modelo: barato, e cego para redundância. |
+| wrapper | Treina o modelo muitas vezes, tirando e pondo colunas, e escolhe pelo que o modelo usa. |
+| embutido | A importância sai do próprio modelo treinado (`L1`, importância de árvore). |
+| RFE | Remove a coluna menos importante de cada vez, até sobrar o número pedido. |
+| RFECV | O `RFE` que decide sozinho quantas colunas ficam, por validação cruzada. |
+| permutation importance | Mede o estrago na nota ao embaralhar uma coluna de cada vez. |
+| Boruta | Procura todas as colunas que carregam informação, comparando cada uma com uma cópia embaralhada. |
+| features sombra | As cópias embaralhadas que o Boruta usa como régua do que é ruído. |
+| all-relevant | A pergunta do Boruta: tudo o que carrega informação, em vez do mínimo que basta. |
+| minimal-optimal | A pergunta do filtro, do wrapper e do embutido: o menor conjunto que mantém a nota. |
+| SHAP | Reparte a contribuição de cada coluna em cada previsão do modelo treinado. |
+| valor de Shapley | A contribuição média de uma coluna considerando todas as combinações possíveis de colunas. |
+| redundância | A coluna que repete informação de outra; é correlação alta entre colunas, não com o alvo. |
+
+## Engenharia de features
+
+| Termo | Em uma frase |
+|-------|--------------|
+| engenharia de features | Criar coluna nova a partir das que existem, com hipótese declarada e medição. |
+| interação | Efeito que só aparece quando duas colunas são olhadas juntas, como o produto delas. |
+| agregação por grupo | Trocar a linha pelo comportamento médio do grupo dela: contexto, não resposta. |
+| transformação de distribuição | Mudar a escala de uma coluna (`log`, quantil) para o modelo lidar melhor com ela. |
+| faixas (binning) | Trocar uma coluna numérica por faixas ordenadas. |
+| data expandida | Extrair mês, dia da semana e fim de semana de uma coluna de data. |
+| palavra-chave (indicador de texto) | Coluna que diz se o texto menciona algo que importa. |
+| vazamento temporal | Coluna que só existe depois do desfecho; usá-la é prever o passado com a resposta na mão. |
+| hipótese | A aposta que justifica a coluna nova. Sem hipótese, criar feature é tentativa. |
+
+## Dado desbalanceado
+
+| Termo | Em uma frase |
+|-------|--------------|
+| dado desbalanceado | Uma classe é muito mais rara que a outra; quebra a acurácia e o corte padrão de 0,5. |
+| PR-AUC (precisão-revocação) | Mede o quão bem o modelo ordena a classe rara; o acaso nela é a taxa de positivos. |
+| revocação (recall) | Dos casos raros que existiam, quantos o modelo pegou. |
+| precisão | Dos casos que o modelo apontou como raros, quantos eram raros de fato. |
+| curva precisão-revocação | A troca entre precisão e revocação em todos os limiares possíveis. |
+| peso da classe (class_weight) | Fazer o erro na classe rara pesar mais no treino, sem mexer no dado. |
+| SMOTE | Criar linha sintética da classe rara, interpolando entre casos raros vizinhos. |
+| subamostragem | Jogar fora linha da classe majoritária até equilibrar as classes. |
+| limiar de decisão | O ponto onde a probabilidade vira resposta; mexer nele troca precisão por revocação sem treinar nada. |
+| reamostragem só no treino | Reamostrar depois da divisão, dentro do pipeline; antes disso o teste deixa de ser teste. |
+
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -124,6 +180,29 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | divisão estratificada | Manter a proporção das classes em treino e teste, o que importa em dado desbalanceado. |
 | dataset de brinquedo | Dado pequeno e sintético usado para ensinar, como as meias-luas e os blobs. |
 | custo (fit_s, predict_s) | Tempo de treino e de previsão; em produção costuma ser o que decide qual modelo vai. |
+| análise exploratória (EDA) | Olhar a tabela antes de modelar: distribuição, faltante, cardinalidade, duplicata e vazamento. |
+| distribuição | Como os valores de uma coluna se espalham, e onde ficam o centro e as caudas. |
+| assimetria (skew) | O quanto a coluna tem cauda de um lado; 0 é simétrica, acima de 1 é cauda longa. |
+| valor faltante (missing) | Ausência de medição, que não é zero nem categoria. |
+| imputação | Preencher o faltante com uma estimativa, dentro do pipeline, para a estatística do teste não entrar no treino. |
+| cardinalidade | Quantos valores distintos uma coluna de texto tem; é o que decide o custo do encoding. |
+| duplicata | A mesma linha aparecendo mais de uma vez na base. |
+| correlação de Pearson | Mede relação em linha reta entre duas colunas numéricas. |
+| correlação de Spearman | Mede relação de ordem, sem exigir que seja reta. |
+| vazamento (leakage) | Coluna que só existe depois do desfecho, ou informação do teste que entra no treino. |
+| classe majoritária | A classe mais frequente; chutar sempre ela é o baseline que a acurácia esconde. |
+| encoding (codificação) | Transformar coluna de texto em número, para o modelo poder usá-la. |
+| coluna ordinal | Categórica em que a ordem existe (`baixo` < `medio` < `alto`). |
+| coluna nominal | Categórica sem ordem (`plano`, `cidade`). |
+| cardinalidade alta | Coluna com muitas categorias distintas; é o que decide entre one-hot e codificação pelo alvo. |
+| one-hot | Uma coluna por categoria, com 1 na categoria da linha e 0 nas outras. |
+| categorias raras | As que têm poucas linhas; juntá-las num rótulo só é decisão que não usa o alvo. |
+| codificação pelo alvo (target encoding) | Trocar a categoria pela média do alvo naquela categoria. |
+| suavização (smoothing) | Puxar a média da categoria na direção da média geral, quando há poucas linhas nela. |
+| codificação com validação cruzada interna | O codificador calcula a média de cada fold, para não usar a própria linha que está codificando. |
+| handle_unknown | O que o codificador faz quando aparece categoria nova na hora de prever: errar ou ignorar. |
+| ColumnTransformer | Objeto que aplica um tratamento diferente a cada grupo de colunas. |
+| Pipeline | Objeto que encadeia tratamentos e modelo, e garante que o tratamento aprenda só no treino. |
 
 ## Não confunda
 
@@ -132,3 +211,10 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **época × iteração**: uma época é uma passada por todo o treino; uma iteração é um passo (um lote).
 - **padronização × normalização**: padronizar é deixar média 0 e desvio 1; normalizar costuma ser reescalar para um intervalo.
 - **importância × causa**: nenhum notebook aqui mede causa, e acurácia não é explicação.
+- **correlação × causa**: duas colunas andando juntas não dizem que uma causa a outra, e uma coluna vazada anda junto porque é o alvo disfarçado.
+- **faltante × zero**: zero é um valor medido, faltante é ausência; tratar os dois igual inventa dado.
+- **one-hot × codificação pelo alvo**: o primeiro não usa o alvo e pode ser calculado antes da divisão; o segundo usa, e por isso tem de acontecer dentro do pipeline.
+- **transformar × criar**: transformar reescreve a coluna que existe (encoding, `log`, faixas); criar acrescenta coluna que não existia (interação, agregação, calendário, palavra-chave).
+- **métrica indefinida × métrica perfeita**: um fold sem nenhuma linha da classe positiva não dá nota 1, dá nota que não existe; a média que ignora esses folds mente.
+- **relevante × redundante**: relevante é carregar informação; redundante é repetir informação que outra coluna já carrega, e o Boruta mede uso, não novidade.
+- **peso da classe × SMOTE**: o peso só muda o que o treino minimiza, o SMOTE inventa linha; os dois mexem no desequilíbrio e os dois só valem dentro do treino.
