@@ -136,6 +136,23 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | MAPE | Erro percentual médio; não existe quando o valor real é zero. |
 | sMAPE | Variação simétrica do MAPE, com teto de 200% e problemas próprios. |
 
+## Modelos de sequência e fundacionais
+
+| Termo | Em uma frase |
+|-------|--------------|
+| janela (contexto) | Quantos valores anteriores entram no modelo; no fundacional, é o contexto entregue. |
+| rede recorrente | Rede que lê a janela em ordem e mantém um estado interno; serve a sequência em vez de tabela. |
+| GRU | Rede recorrente com duas portas; mais simples que a LSTM e suficiente em série curta. |
+| LSTM | Rede recorrente com portas de memória, a alternativa mais pesada da GRU. |
+| escalonamento no treino | Média e desvio vindos só do treino, aplicados depois; usar o conjunto inteiro carrega informação do futuro. |
+| semente | O sorteio da inicialização dos pesos; com o mesmo dado e código, muda a nota. |
+| época | Uma passada completa pelo treino; é o orçamento de treino de uma rede. |
+| ponto de parada | Parar o treino quando a validação piora, que é o que evita decorar o treino. |
+| modelo fundacional de série | Modelo pré-treinado em milhares de séries de domínios diferentes, que prevê sem treinar na sua. |
+| previsão zero-shot | Prever sem treinar: o modelo recebe só o contexto. |
+| quantil | O valor abaixo do qual cai uma fração das previsões; a mediana é o quantil de 50%. |
+| intervalo de previsão | A faixa entre dois quantis, como 10% a 90%; nenhum modelo de árvore devolve isso direto. |
+
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -159,3 +176,6 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **recursiva × direta**: a recursiva alimenta o modelo com as próprias previsões e por isso acumula erro; a direta treina um modelo para cada passo do horizonte.
 - **MAPE × MASE**: o MAPE devolve `inf` com um zero na conta e distorce em série de valor baixo; o MASE é relativo a um baseline da própria série, então 1,0 tem o mesmo sentido em qualquer uma.
 - **janela expansível × deslizante**: as duas fazem backtesting; a expansível acumula histórico, a deslizante mantém o treino do mesmo tamanho.
+- **janela do modelo × janela do backtesting**: a janela do modelo é o contexto que entra na previsão; a janela do backtesting é quanto histórico entra no ajuste a cada origem.
+- **nota de uma rede × diferença entre métodos**: a nota de uma rede precisa vir com a faixa das sementes, senão não dá para saber se a diferença para outro método é real.
+- **zero-shot × ajuste**: zero-shot é prever sem treinar; modelo ajustado viu a sua série, o fundacional não.
