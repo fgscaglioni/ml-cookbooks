@@ -16,7 +16,8 @@ ml-cookbooks/
 │   ├── deep-learning/     # MLP, CNNs, RNNs (PyTorch)
 │   ├── unsupervisioned/   # Clustering (K-Means, DBSCAN), Redução (PCA, t-SNE)
 │   ├── metaheuristics/    # Busca e otimização: algoritmos genéticos
-│   └── foundational/      # Modelos fundacionais tabulares (TabPFN, Mitra)
+│   ├── foundational/      # Modelos fundacionais tabulares (TabPFN, Mitra)
+│   └── time-series/       # O teste é o futuro: protocolo temporal, ETS/SARIMAX, lags, fundacional
 ├── data/                  # Datasets de exemplo ou scripts de download
 ├── requirements.txt       # Dependências globais do ambiente
 ├── GLOSSARIO.md           # Os termos em inglês, um por linha
