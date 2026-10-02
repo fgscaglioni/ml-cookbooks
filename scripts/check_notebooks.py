@@ -4,15 +4,22 @@
     python3 scripts/check_notebooks.py    # da raiz do repo
     exit 0 = tudo ok; exit 1 = regra violada
 
-Checa: JSON valido e nbformat 4, nenhum output de erro, run completo (execution_count
-1..N), toda referencia .ipynb resolve para arquivo existente, todo install de tabpfn/
-autogluon com versao fixada e .gitignore cobrindo dado e artefato gerado.
+Checa: JSON valido e nbformat 4, estrutura da celula (id presente, e outputs e
+execution_count em toda celula de codigo), schema nbformat via nbformat.validate quando a
+lib esta instalada, nenhum output de erro, run completo (execution_count 1..N), toda
+referencia .ipynb resolve para arquivo existente, todo install de tabpfn/autogluon com
+versao fixada e .gitignore cobrindo dado e artefato gerado.
 """
 import json
 import pathlib
 import re
 import subprocess
 import sys
+
+try:
+    import nbformat
+except ImportError:  # o check estrutural continua valendo sem a lib
+    nbformat = None
 
 REPO = pathlib.Path(__file__).resolve().parent.parent
 NBDIR = REPO / "notebooks"
@@ -48,6 +55,22 @@ for nb_path in notebooks:
         continue
 
     checa(nb.get("nbformat") == 4, f"{rel}: nbformat 4")
+    faltando = [c for c in nb.get("cells", [])
+                if "id" not in c
+                or (c.get("cell_type") == "code"
+                    and ("outputs" not in c or "execution_count" not in c))]
+    checa(not faltando,
+          f"{rel}: celula com id, e celula de codigo com outputs e execution_count"
+          + (f" (faltam em {len(faltando)})" if faltando else ""))
+    if nbformat is None:
+        avisa(f"{rel}: nbformat nao instalado, schema nao conferido (pip install nbformat)")
+    else:
+        try:
+            nbformat.validate(nbformat.read(str(nb_path), as_version=4))
+            checa(True, f"{rel}: schema nbformat valido")
+        except Exception as e:
+            checa(False, f"{rel}: schema nbformat invalido -> {getattr(e, 'message', e)}")
+
     codigo = [c for c in nb["cells"] if c["cell_type"] == "code"]
     fontes = "\n".join("".join(c["source"]) for c in nb["cells"])
 
