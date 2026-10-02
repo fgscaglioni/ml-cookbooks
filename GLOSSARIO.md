@@ -124,6 +124,17 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | divisão estratificada | Manter a proporção das classes em treino e teste, o que importa em dado desbalanceado. |
 | dataset de brinquedo | Dado pequeno e sintético usado para ensinar, como as meias-luas e os blobs. |
 | custo (fit_s, predict_s) | Tempo de treino e de previsão; em produção costuma ser o que decide qual modelo vai. |
+| análise exploratória (EDA) | Olhar a tabela antes de modelar: distribuição, faltante, cardinalidade, duplicata e vazamento. |
+| distribuição | Como os valores de uma coluna se espalham, e onde ficam o centro e as caudas. |
+| assimetria (skew) | O quanto a coluna tem cauda de um lado; 0 é simétrica, acima de 1 é cauda longa. |
+| valor faltante (missing) | Ausência de medição, que não é zero nem categoria. |
+| imputação | Preencher o faltante com uma estimativa, dentro do pipeline, para a estatística do teste não entrar no treino. |
+| cardinalidade | Quantos valores distintos uma coluna de texto tem; é o que decide o custo do encoding. |
+| duplicata | A mesma linha aparecendo mais de uma vez na base. |
+| correlação de Pearson | Mede relação em linha reta entre duas colunas numéricas. |
+| correlação de Spearman | Mede relação de ordem, sem exigir que seja reta. |
+| vazamento (leakage) | Coluna que só existe depois do desfecho, ou informação do teste que entra no treino. |
+| classe majoritária | A classe mais frequente; chutar sempre ela é o baseline que a acurácia esconde. |
 
 ## Não confunda
 
@@ -132,3 +143,5 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **época × iteração**: uma época é uma passada por todo o treino; uma iteração é um passo (um lote).
 - **padronização × normalização**: padronizar é deixar média 0 e desvio 1; normalizar costuma ser reescalar para um intervalo.
 - **importância × causa**: nenhum notebook aqui mede causa, e acurácia não é explicação.
+- **correlação × causa**: duas colunas andando juntas não dizem que uma causa a outra, e uma coluna vazada anda junto porque é o alvo disfarçado.
+- **faltante × zero**: zero é um valor medido, faltante é ausência; tratar os dois igual inventa dado.
