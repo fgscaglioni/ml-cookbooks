@@ -27,6 +27,14 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | ajuste de hiperparâmetros (tuning) | Procurar a combinação de hiperparâmetros que rende mais numa métrica de validação. |
 | semente (seed) | O número que fixa os sorteios; com a mesma semente o mesmo código dá o mesmo resultado, quando o método é determinístico. |
 | validação cruzada (k-fold) | Dividir o treino em k partes e treinar k vezes, cada vez com uma parte de fora; devolve média e desvio, que uma divisão só não dá. |
+| KFold | Divide a tabela em k partes iguais; embaralhar é obrigatório quando a tabela veio ordenada, senão um fold pode ficar sem nenhuma classe positiva. |
+| StratifiedKFold | O mesmo, mantendo a proporção das classes em cada parte; é o padrão em classificação. |
+| GroupKFold | Mantém o grupo inteiro (pessoa, cliente, sensor) de um lado só; evita que o modelo reconheça quem respondeu. |
+| TimeSeriesSplit | Treina sempre no passado e testa no futuro; é a única divisão honesta quando existe ordem. |
+| grupo (groups=) | A coluna que diz a que unidade a linha pertence, quando uma unidade responde mais de uma linha. |
+| vazamento por grupo | Nota alta porque linhas da mesma unidade aparecem no treino e no teste; não gera aviso e depende do modelo aparecer. |
+| validação aninhada | Um laço externo mede e um interno escolhe, para o número que serviu para escolher não ser o número que você reporta. |
+| origem deslizante (backtesting) | Reavaliar o modelo avançando a origem do treino e testando sempre o bloco seguinte. |
 | validação | O pedaço usado para decidir (escolher hiperparâmetro, parar o treino). Não é o teste. |
 | teste | O pedaço que só se olha no fim, para medir de verdade; decidir olhando o teste é a forma mais fácil de publicar número otimista. |
 | baseline | O resultado simples que qualquer proposta precisa superar para valer a pena. |
@@ -173,3 +181,4 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **faltante × zero**: zero é um valor medido, faltante é ausência; tratar os dois igual inventa dado.
 - **one-hot × codificação pelo alvo**: o primeiro não usa o alvo e pode ser calculado antes da divisão; o segundo usa, e por isso tem de acontecer dentro do pipeline.
 - **transformar × criar**: transformar reescreve a coluna que existe (encoding, `log`, faixas); criar acrescenta coluna que não existia (interação, agregação, calendário, palavra-chave).
+- **métrica indefinida × métrica perfeita**: um fold sem nenhuma linha da classe positiva não dá nota 1, dá nota que não existe; a média que ignora esses folds mente.
