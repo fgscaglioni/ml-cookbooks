@@ -153,6 +153,21 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 | vazamento temporal | Coluna que só existe depois do desfecho; usá-la é prever o passado com a resposta na mão. |
 | hipótese | A aposta que justifica a coluna nova. Sem hipótese, criar feature é tentativa. |
 
+## Dado desbalanceado
+
+| Termo | Em uma frase |
+|-------|--------------|
+| dado desbalanceado | Uma classe é muito mais rara que a outra; quebra a acurácia e o corte padrão de 0,5. |
+| PR-AUC (precisão-revocação) | Mede o quão bem o modelo ordena a classe rara; o acaso nela é a taxa de positivos. |
+| revocação (recall) | Dos casos raros que existiam, quantos o modelo pegou. |
+| precisão | Dos casos que o modelo apontou como raros, quantos eram raros de fato. |
+| curva precisão-revocação | A troca entre precisão e revocação em todos os limiares possíveis. |
+| peso da classe (class_weight) | Fazer o erro na classe rara pesar mais no treino, sem mexer no dado. |
+| SMOTE | Criar linha sintética da classe rara, interpolando entre casos raros vizinhos. |
+| subamostragem | Jogar fora linha da classe majoritária até equilibrar as classes. |
+| limiar de decisão | O ponto onde a probabilidade vira resposta; mexer nele troca precisão por revocação sem treinar nada. |
+| reamostragem só no treino | Reamostrar depois da divisão, dentro do pipeline; antes disso o teste deixa de ser teste. |
+
 ## Dados e vocabulário comum
 
 | Termo | Em uma frase |
@@ -202,3 +217,4 @@ Os termos em inglês que aparecem nos notebooks, cada um traduzido em uma frase.
 - **transformar × criar**: transformar reescreve a coluna que existe (encoding, `log`, faixas); criar acrescenta coluna que não existia (interação, agregação, calendário, palavra-chave).
 - **métrica indefinida × métrica perfeita**: um fold sem nenhuma linha da classe positiva não dá nota 1, dá nota que não existe; a média que ignora esses folds mente.
 - **relevante × redundante**: relevante é carregar informação; redundante é repetir informação que outra coluna já carrega, e o Boruta mede uso, não novidade.
+- **peso da classe × SMOTE**: o peso só muda o que o treino minimiza, o SMOTE inventa linha; os dois mexem no desequilíbrio e os dois só valem dentro do treino.
