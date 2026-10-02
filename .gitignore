@@ -216,3 +216,19 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Data
+#   Datasets e artefatos baixados não entram no versionamento; a pasta
+#   é mantida no repositório via .gitkeep.
+data/*
+!data/.gitkeep
+
+# Artefatos dos notebooks
+#   Gerados ao rodar os notebooks (tabelas de resultado, cache de splits e
+#   diretórios de modelo do AutoGluon). Nada disso vai para o versionamento.
+artifacts_tabpfn/
+artifacts_mitra/
+splits_fingerprint.json
+ag_warmup_*/
+ag_mitra_*/
+modelo_mitra_*/
