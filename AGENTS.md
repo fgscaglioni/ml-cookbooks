@@ -18,7 +18,7 @@ python3 scripts/check_notebooks.py     # da raiz do repo
 
 Esperado: `PASSOU: 0 falha(s)` e exit 0. Aviso não bloqueia, falha bloqueia.
 
-Rodar um notebook: a primeira célula de código instala o que falta, com versão fixada. Localmente exige **Python 3.12** — foi o único ambiente em que o extra `autogluon.tabular[mitra]` instalou (em 3.14 o pip resolve o beta de 2021 `autogluon-tabular 0.0.16b20210206` e quebra ao compilar o scipy). No Colab, GPU para o Mitra.
+Rodar um notebook: a primeira célula de código instala o que falta, com versão fixada; ambiente local no `README.md`. Exige Python 3.12: em 3.14 o pip resolve o beta `autogluon-tabular 0.0.16b20210206` e quebra no scipy. No Colab, GPU para o Mitra.
 
 Os cookbooks são um par ordenado: o `01_*` escreve `splits_fingerprint.json` e o `02_*` confere a igualdade das partições, falhando se divergirem. Rodar o 01 antes do 02.
 
@@ -32,10 +32,11 @@ Os cookbooks são um par ordenado: o `01_*` escreve `splits_fingerprint.json` e 
 ## Proibido
 
 - Usar a ferramenta `patch` em `.ipynb`: o `source` é array JSON escapado e o arquivo corrompe. Editar por script — `nbformat` ou substituição literal no texto do arquivo; `json.dumps(nb, indent=1, ensure_ascii=False) + "\n"` reproduz o arquivo byte a byte, mantendo o diff mínimo.
-- Apagar outputs, ou reexecutar notebook, só para "limpar": os outputs são o registro do run. Só limpar quando for pedido.
+- Repor ou "consertar" outputs: os notebooks são versionados **sem outputs** (sem log de instalação, sem caminho de máquina, sem resultado de run antigo). Não reexecutar para preencher.
 - Renomear ou mover notebook sem corrigir as referências de texto **e** de caminho no mesmo commit, junto com o `README.md`, e sem rodar o portão.
 - Commitar dado, artefato de execução ou output com caminho absoluto de máquina (`/home/<usuário>/...`): o repositório é público.
-- Instalar dependência sem versão fixada.
+- Instalar sem versão fixada.
+- Usar `!pip install` em célula de notebook: o `!` chama o pip do PATH, não o do kernel, e num venv criado com `uv venv` (sem pip) falha com `externally-managed-environment` no pip do sistema. Célula de instalação usa `%pip install`; código Python usa `sys.executable -m pip install`.
 - Repetir no `AGENTS.md` o que já está no `README.md`.
 
 ## Manter

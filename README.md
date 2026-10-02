@@ -38,3 +38,14 @@ Cada notebook é autossuficiente: instala o que precisa (com versão fixada, par
 | C2 | [`cookbooks/02_mitra_autogluon_cookbook.ipynb`](notebooks/foundational/cookbooks/02_mitra_autogluon_cookbook.ipynb) | protocolo completo | Mitra em modo zero-shot | confere o `splits_fingerprint.json` do C1 e compara na mesma partição |
 
 Os dois cookbooks formam um par ordenado: rode o C1 primeiro (ele escreve `splits_fingerprint.json`) e o C2 confere a igualdade das partições antes de comparar. Artefatos gerados na execução (`artifacts_*/`, `splits_fingerprint.json` e os diretórios de modelo do AutoGluon) ficam fora do versionamento.
+
+---
+
+## 🛠️ Ambiente local
+
+```bash
+uv venv --python 3.12 --seed .venv
+source .venv/bin/activate
+uv pip install tabpfn==9.0.0 "autogluon.tabular[mitra]==1.6.3" ipykernel==7.4.0
+python -m ipykernel install --user --name ml-cookbooks --display-name "Python (ml-cookbooks)"
+```
